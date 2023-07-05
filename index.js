@@ -20,6 +20,16 @@ app.use(express.urlencoded({ extended: false }));
 // json middleware
 app.use(express.json());
 
+// public directory
+app.use(express.static("views"))
+
+// assets from views/dist/assets
+app.use("/assets", express.static("views/dist/assets"));
+
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/views/dist/index.html");
+});
+
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
