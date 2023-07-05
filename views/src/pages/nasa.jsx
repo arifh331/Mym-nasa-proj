@@ -20,7 +20,7 @@ function nasa({ setLoggedIn }) {
       return;
     }
 
-    const url = "http://localhost:3000/nasa-image-of-the-day";
+    const url = "/nasa-image-of-the-day";
 
 
     fetch(url, {

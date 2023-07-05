@@ -9,7 +9,7 @@ function googleBtn({ setToken }) {
     console.log(response);
 
     // Make a POST request to your backend route for Google authentication
-    fetch("http://localhost:3000/auth/google", {
+    fetch("/auth/google", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
