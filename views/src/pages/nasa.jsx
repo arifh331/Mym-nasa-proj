@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 
-function nasa() {
+function nasa({ setLoggedIn }) {
   const [nasaImage, setNasaImage] = useState(null);
   const [nasaTitle, setNasaTitle] = useState(null);
   const [nasaExplanation, setNasaExplanation] = useState(null);
@@ -16,12 +16,13 @@ function nasa() {
     console.log(token);
     if (!token) {
       setIsLoggedIn(false);
+      setLoggedIn(false);
       return;
     }
 
     const url = "http://localhost:3000/nasa-image-of-the-day";
 
-    setIsLoading(true);
+
     fetch(url, {
       method: "GET",
       headers: {
@@ -32,6 +33,7 @@ function nasa() {
         console.log(response.status);
         if (response.status === 401) {
           setIsLoggedIn(false);
+          setLoggedIn(false);
           setIsLoading(false);
           return null;
         }
@@ -41,12 +43,20 @@ function nasa() {
         console.log(data);
         if (data) {
           setIsLoggedIn(true);
+          setLoggedIn(true);
           setIsLoading(false);
           setNasaImage(data.url);
           setNasaTitle(data.title);
           setNasaExplanation(data.explanation);
         }
       });
+  }
+
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    setLoggedIn(false);
   }
 
   useEffect(() => {
@@ -65,6 +75,26 @@ function nasa() {
           <h2>{nasaTitle}</h2>
           {/* <p>{nasaExplanation}</p> */}
           <img width="100%" src={nasaImage} alt={nasaTitle} />
+
+          <div style={{
+            marginTop: "20px",
+            display: "flex",
+            justifyContent: "center",
+          }} className="form__field" onClick={logout}>
+            <button
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              padding: "10px",
+              borderRadius: "5px",
+              backgroundColor: "red",
+              color: "white",
+            }}
+            >
+              Logout
+            </button>
+          </div>
+
         </div>
       ) : isLoading ? (
         <>Loading...</>

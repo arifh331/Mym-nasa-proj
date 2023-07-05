@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaLock, FaUser } from "react-icons/fa";
 import GoogleBtn from "../components/googleBtn";
 
-function login({ setUser }) {
+function login({ setLoggedIn }) {
   const [username, setUsername] = useState("jack");
   const [password, setPassword] = useState("jill");
   const [signup, setSignup] = useState(false);
@@ -11,8 +11,18 @@ function login({ setUser }) {
 
   function setToken(userToken) {
     localStorage.setItem("token", userToken);
-    location.href = "/";
+    setLoggedIn(true);
   }
+
+
+  function isLoggedIn(){
+    const token = localStorage.getItem("token");
+    if (token) {
+      setLoggedIn(true);
+    }
+  }
+
+  isLoggedIn()
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -111,7 +121,12 @@ function login({ setUser }) {
           </a>
         </p>
 
-        <GoogleBtn setToken={setToken} />
+<div style={{
+  display: 'flex',
+  justifyContent: 'center'
+}}>
+<GoogleBtn setToken={setToken} />
+</div>
       </div>
       <svg xmlns="http://www.w3.org/2000/svg" className="icons">
         <symbol id="icon-arrow-right" viewBox="0 0 1792 1792">

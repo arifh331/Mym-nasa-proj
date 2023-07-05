@@ -1,18 +1,19 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useState } from "react";
 import "./App.css";
 import Login from "./pages/login";
 import Nasa from "./pages/nasa";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/">
-          <Route index element={<Nasa />} />
-          <Route path="login" element={<Login />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <>
+      {isLoggedIn ? (
+        <Nasa setLoggedIn={setIsLoggedIn} />
+      ) : (
+        <Login setLoggedIn={setIsLoggedIn} />
+      )}
+    </>
   );
 }
 

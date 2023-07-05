@@ -1,4 +1,4 @@
-require('dotenv').config()
+require("dotenv").config();
 const express = require("express");
 
 const mongoose = require("mongoose");
@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const cors = require("cors");
 
 const { OAuth2Client } = require("google-auth-library");
-const connectDB = require('./config/db');
+const connectDB = require("./config/db");
 const client = new OAuth2Client(process.env.GCLIENT_ID);
 
 connectDB()
@@ -20,15 +20,8 @@ app.use(express.urlencoded({ extended: false }));
 // json middleware
 app.use(express.json());
 
-// public directory
-app.use(express.static("views"))
-
 // assets from views/dist/assets
 app.use("/assets", express.static("views/dist/assets"));
-
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/views/dist/index.html");
-});
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -40,6 +33,11 @@ const userSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model("User", userSchema);
+
+app.get("/", (req, res) => {
+  console.log("hello");
+  res.sendFile(__dirname + "/views/dist/index.html");
+});
 
 // sign-up route
 app.post("/sign-up", async (req, res) => {
@@ -117,7 +115,7 @@ app.post("/auth/google", async (req, res) => {
       {
         email,
       },
-      process.env.SEC
+      process.env.SECRET_KEY
     );
 
     res.json({
