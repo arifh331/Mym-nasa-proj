@@ -32,7 +32,7 @@ function login({ setLoggedIn }) {
       password,
     };
 
-    fetch("http://localhost:3000/" + (signup ? "sign-up" : "login"), {
+    fetch("/" + (signup ? "sign-up" : "login"), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -144,3 +144,4 @@ function login({ setLoggedIn }) {
 }
 
 export default login;
+ 
