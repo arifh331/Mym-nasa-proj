@@ -32,7 +32,7 @@ This project is a Single Page Application (SPA) that fetches the Astronmy Pictur
 
 ## Deployment
 
-The NASA Daily Image Viewer application is deployed using Vercel. It was slightly trickly to get this set-up but the deployed version of the application can be accessed at [[Here](https://mym-nasa-proj.vercel.app/)](application-url).
+The NASA Daily Image Viewer application is deployed using Vercel. It was slightly trickly to get this set-up but the deployed version of the application can be accessed at [Here(https://mym-nasa-proj.vercel.app/)].
 
 ## Installation and Setup
 
